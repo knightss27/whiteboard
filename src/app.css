@@ -13,6 +13,10 @@ body {
   display: none !important;
 }
 
+.palette__root {
+  padding-top: 1rem !important;
+}
+
 :root {
   --range-slider:          #d7dada; /* slider main background color */
   --range-handle-inactive: #99a2a2; /* inactive handle color */

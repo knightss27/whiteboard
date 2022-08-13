@@ -44,7 +44,7 @@
         const slug = await res.json();
         console.log(slug);
 
-        navigator.clipboard.writeText(`https://board.poop.fish/${slug}`).then(function() {
+        navigator.clipboard.writeText(`https://board.poop.fish/#${slug}`).then(function() {
             console.log('Async: Copying to clipboard was successful!');
         }, function(err) {
             console.error('Async: Could not copy text: ', err);
@@ -53,6 +53,7 @@
 </script>
 
 <div>
+    <p>v1.0</p>
     <Palette {colors} on:select={(e) => {wb.brushColor = e.detail.color; console.log(e.detail.color)}} />
     <RangeSlider min={1} values={[2]} on:stop={(e) => {wb.brushSize = e.detail.value}} float />
     <button on:click={handleShare}>share</button>
@@ -85,5 +86,13 @@
 
     button:active {
         background-color: #ddd;
+    }
+
+    p {
+        background-color: #fafafa;
+        color: #ddd;
+        text-align: center;
+        font-size: 12px;
+        padding: 0.5rem 0rem;
     }
 </style>
