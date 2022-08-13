@@ -28,28 +28,32 @@ export default class Whiteboard {
         this.canvas.onmousemove = (e: MouseEvent) => {this.mousemove(e)};
         this.canvas.onmouseup = (e: MouseEvent) => {this.mouseup(e)};
 
-        this.canvas.ontouchstart = (e: TouchEvent) => {
-            if (e.touches.length === 1) {
-                let e2 = {x: e.touches[0].clientX, y: e.touches[0].clientY}
-                // @ts-ignore
-                this.mousedown(e2)
-            }  
-        };
-         
-        this.canvas.ontouchmove = (e: TouchEvent) => {
-            if (e.touches.length === 1) {
-                let e2 = {x: e.touches[0].clientX, y: e.touches[0].clientY}
-                // @ts-ignore
-                this.mousemove(e2)
-            } 
-        };
+        this.canvas.ontouchstart = (e: TouchEvent) => {this.touchstart(e)};
+        this.canvas.ontouchmove = (e: TouchEvent) => {this.touchmove(e)};
+        this.canvas.ontouchend = (e: TouchEvent) => {this.touchend(e)};
+    }
 
-        this.canvas.ontouchend = (e: TouchEvent) => {
-            if (e.touches.length === 0) {
-                // @ts-ignore
-                this.mouseup(e)
-            } 
-        };
+    touchstart(e: TouchEvent): void {
+        if (e.touches.length === 1) {
+            let e2 = {x: e.touches[0].clientX, y: e.touches[0].clientY}
+            // @ts-ignore
+            this.mousedown(e2)
+        }
+    }
+
+    touchmove(e: TouchEvent): void {
+        if (e.touches.length === 1) {
+            let e2 = {x: e.touches[0].clientX, y: e.touches[0].clientY}
+            // @ts-ignore
+            this.mousemove(e2)
+        }
+    }
+
+    touchend(e: TouchEvent): void {
+        if (e.touches.length === 0) {
+            // @ts-ignore
+            this.mouseup(e)
+        } 
     }
 
     mousedown(e: MouseEvent): void {

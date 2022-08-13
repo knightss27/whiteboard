@@ -43,6 +43,7 @@
 
         const slug = await res.json();
         // console.log(slug);
+        shareText = `https://board.poop.fish/#${slug}`
 
         navigator.clipboard.writeText(`https://board.poop.fish/#${slug}`).then(function() {
             console.log('Async: Copying to clipboard was successful!');
@@ -53,11 +54,11 @@
         });
     }
 
-    let shareText= "share";
+    export let shareText = "share";
 </script>
 
 <div>
-    <p>v1.1</p>
+    <p>v1.2</p>
     <Palette {colors} on:select={(e) => {wb.brushColor = e.detail.color; console.log(e.detail.color)}} />
     <RangeSlider min={1} values={[2]} on:stop={(e) => {wb.brushSize = e.detail.value}} float />
     <button on:click={handleShare}>{shareText}</button>

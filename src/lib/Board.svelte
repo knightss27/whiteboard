@@ -12,6 +12,8 @@ let c: HTMLCanvasElement;
 // Main whiteboard
 let wb: Whiteboard;
 
+let shareText = "share";
+
 onMount(async () => {
     console.log(c)
 
@@ -21,6 +23,13 @@ onMount(async () => {
 
     document.body.onresize = () => {
         wb.draw();
+    }
+
+    wb.canvas.ontouchstart = (e: TouchEvent) => {
+        if (shareText != "share") {
+            shareText = "share";
+        }
+        wb.touchstart(e);
     }
 
     if (window.location.hash.length > 1) {
@@ -40,7 +49,7 @@ onMount(async () => {
 
 <svelte:window bind:innerWidth bind:innerHeight></svelte:window>
 
-<Controls {wb} />
+<Controls {wb} bind:shareText />
 <canvas
     id="test"
     width={innerWidth} 
