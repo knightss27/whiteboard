@@ -18,8 +18,8 @@ onMount(async () => {
     wb = new Whiteboard(c);
     document.addEventListener("keydown", (e) => {wb.keydown(e)});
 
-    if (window.location.pathname.length > 1) {
-        const slug = window.location.pathname.split("/")[1];
+    if (window.location.hash.length > 1) {
+        const slug = window.location.hash.split("#")[1];
         const res = await fetch(`https://board.poop.fish/?board=${slug}`)
         const json: Whiteboard = await res.json();
         
