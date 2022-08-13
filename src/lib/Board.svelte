@@ -21,10 +21,10 @@ onMount(async () => {
     if (window.location.hash.length > 1) {
         const slug = window.location.hash.split("#")[1];
         const res = await fetch(`https://board.poop.fish/?board=${slug}`)
-        const json: Whiteboard = await res.json();
+        const json = await res.json();
         
         console.log(json);
-        wb.loadJson(json);
+        wb.loadJson(JSON.parse(json));
     }
 })
 
