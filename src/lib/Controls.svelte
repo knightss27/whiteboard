@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Palette } from '@untemps/svelte-palette';
     import RangeSlider from 'svelte-range-slider-pips';
-    import { onMount } from 'svelte';
     import type Whiteboard from './Whiteboard';
     
     export let wb: Whiteboard;
+    // export let debug: string;
 
 	const colors = [
         'rgb(255,255,255)',
@@ -42,21 +42,25 @@
         })
 
         const slug = await res.json();
-        console.log(slug);
+        // console.log(slug);
 
         navigator.clipboard.writeText(`https://board.poop.fish/#${slug}`).then(function() {
             console.log('Async: Copying to clipboard was successful!');
+            shareText = "copied!";
+            setTimeout(() => {shareText = "share"}, 2000);
         }, function(err) {
             console.error('Async: Could not copy text: ', err);
         });
     }
+
+    let shareText= "share";
 </script>
 
 <div>
-    <p>v1.0</p>
+    <p>v1.1</p>
     <Palette {colors} on:select={(e) => {wb.brushColor = e.detail.color; console.log(e.detail.color)}} />
     <RangeSlider min={1} values={[2]} on:stop={(e) => {wb.brushSize = e.detail.value}} float />
-    <button on:click={handleShare}>share</button>
+    <button on:click={handleShare}>{shareText}</button>
 </div>
 
 <style>

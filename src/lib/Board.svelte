@@ -18,12 +18,18 @@ onMount(async () => {
     wb = new Whiteboard(c);
     document.addEventListener("keydown", (e) => {wb.keydown(e)});
 
+
+    document.body.onresize = () => {
+        wb.draw();
+    }
+
     if (window.location.hash.length > 1) {
         const slug = window.location.hash.split("#")[1];
         const res = await fetch(`https://board.poop.fish/?board=${slug}`)
         const json = await res.json();
         
-        console.log(json);
+        // console.log(json);
+        console.log("Loading board JSON")
         wb.loadJson(JSON.parse(json));
     }
 })
