@@ -58,7 +58,7 @@
 </script>
 
 <div>
-    <p>v1.2</p>
+    <p>v1.3</p>
     <Palette {colors} on:select={(e) => {wb.brushColor = e.detail.color; console.log(e.detail.color)}} />
     <RangeSlider min={1} values={[2]} on:stop={(e) => {wb.brushSize = e.detail.value}} float />
     <button on:click={handleShare}>{shareText}</button>

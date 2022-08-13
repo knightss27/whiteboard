@@ -71,8 +71,27 @@ export default class Whiteboard {
 
     mousemove(e: MouseEvent): void {
         if (this.isDrawing) {
-            // Append new points to asset            
-            this.currentAsset.points.push(new Point(e.x, e.y))
+
+            // Math for calculating straight lines when holding shift!
+            if (e.shiftKey) {
+                if (this.currentAsset.points.length < 2) {
+                    this.currentAsset.points.push(this.currentAsset.points[0].clone());
+                }
+                let ratio = Math.abs(e.x - this.currentAsset.points[this.currentAsset.points.length-2].x) / Math.abs(e.y - this.currentAsset.points[this.currentAsset.points.length-2].y);
+                if (ratio > 1.5) {
+                    this.currentAsset.points.splice(this.currentAsset.points.length-1, 1, new Point(e.x, this.currentAsset.points[this.currentAsset.points.length-2].y))
+                } else if (ratio < 0.5) {
+                    this.currentAsset.points.splice(this.currentAsset.points.length-1, 1, new Point(this.currentAsset.points[this.currentAsset.points.length-2].x, e.y))
+                } else {
+                    let r = this.currentAsset.points[this.currentAsset.points.length-2].distance(new Point(e.x, e.y));
+                    this.currentAsset.points.splice(this.currentAsset.points.length-1, 1, new Point(this.currentAsset.points[this.currentAsset.points.length-2].x + (e.x - this.currentAsset.points[this.currentAsset.points.length-2].x < 0 ? -1 : 1) * r * Math.cos(Math.PI/4),this.currentAsset.points[this.currentAsset.points.length-2].y + (e.y - this.currentAsset.points[this.currentAsset.points.length-2].y < 0 ? -1 : 1) * r * Math.sin(Math.PI/4)))
+                }
+            } else {
+                // Append new points to asset            
+                this.currentAsset.points.push(new Point(e.x, e.y))
+            }
+
+
             // this.currentAsset.points = this.resample(this.currentAsset);
             
             // Update viewport
