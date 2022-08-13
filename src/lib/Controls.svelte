@@ -32,9 +32,13 @@
 	]
 
     const handleShare = async () => {
-        const res = await fetch("https://boards.poop.fish", {
+        const res = await fetch("https://board.poop.fish/boards", {
             method: "POST",
-            body: JSON.stringify(wb)
+            body: JSON.stringify(wb),
+            headers: {
+                'Access-Control-Allow-Origin': 'https://board.poop.fish',
+                "Content-Type": "application/json"
+            }
         })
 
         const slug = await res.json();
