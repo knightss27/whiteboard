@@ -32,7 +32,7 @@
 	]
 
     const handleShare = async () => {
-        const res = await fetch("https://board.poop.fish/boards", {
+        const res = await fetch("https://board.poop.fish/", {
             method: "POST",
             body: JSON.stringify(wb),
             headers: {

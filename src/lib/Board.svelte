@@ -20,7 +20,7 @@ onMount(async () => {
 
     if (window.location.pathname.length > 1) {
         const slug = window.location.pathname.split("/")[1];
-        const res = await fetch(`https://board.poop.fish/boards/${slug}`)
+        const res = await fetch(`https://board.poop.fish/?board=${slug}`)
         const json: Whiteboard = await res.json();
         
         console.log(json);
